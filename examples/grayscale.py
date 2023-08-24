@@ -9,7 +9,8 @@ from numpy import ndarray
 from pycvl import *
 
 
-RESOURCES_DIR_PATH = Path('/run/media/akimg/windd/Projects/PyCvl/resources')
+ROOT_PROJECT_PATH = Path(__file__) / '..'
+RESOURCES_DIR_PATH = ROOT_PROJECT_PATH / 'resources'
 
 
 def main():
@@ -36,15 +37,13 @@ def main():
     imwrite('/tmp/canny_frame_2.jpeg', canny_2)
 
 
-    #
-
-
 # Canny by sigma test
     canny_sigma_2 = canny_sigma(gray_frame_2.copy(), 3, 0.05, True)
     imwrite('/tmp/canny_sigma_frame_2.jpeg', canny_sigma_2)
 
     # Differences test
-    file_path_tmpl = '/run/media/akimg/windd/Projects/PyCvl/resources/test_frame_%s.jpeg'
+    res = str(RESOURCES_DIR_PATH.absolute())
+    file_path_tmpl = f'{res}/test_frame_%s.jpeg'
     all_frames = [imread(file_path_tmpl % index) for index in range(1, 20)]
     all_frames = [grayscale(img) for img in all_frames if img is not None]
     all_frames = [canny_sigma(img, 3, 0.05, True) for img in all_frames]
