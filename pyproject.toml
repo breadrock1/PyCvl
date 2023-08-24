@@ -1,0 +1,17 @@
+[project]
+name = "pycvl"
+version = "0.0.1"
+license = "LICENSE"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    { name = "Bread White", email = "breadrock1@gmail.com" },
+    { name = "Artem Amentes" },
+]
+
+[project.urls]
+homepage = "https://github.com/breadrock1/pycvl"
+
+[build-system]
+requires = ["maturin>=0.13,<0.14"]
+build-backend = "maturin"
