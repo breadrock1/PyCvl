@@ -8,7 +8,12 @@ The `PyCvl` project is a `Python` bindings based on `CVLCore` private repository
 
 The more information you can find here [CvlDesktop](https://github.com/breadrock1/CVLDetector)
 
-#### WARNING
+<p float="left">
+  <img src="resources/test_video_orig.gif" />
+  <img src="resources/test_video_vibro.gif" />
+</p>
+
+### WARNING!!!
 
 To get main library access please visit site: https://clvdetector.socialcodesoftware.co.uk/
 
