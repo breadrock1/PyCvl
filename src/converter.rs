@@ -1,11 +1,11 @@
 use cvlcore::core::mat::*;
 
+use numpy::ndarray::{Array2, Array3};
 use numpy::{Ix2, Ix3, ToPyArray};
 use numpy::{PyArray, PyReadonlyArray2, PyReadonlyArray3};
-use numpy::ndarray::{Array2, Array3};
 
-use pyo3::prelude::{Py, Python, PyResult};
 use pyo3::exceptions::PyException;
+use pyo3::prelude::{Py, PyResult, Python};
 
 pub fn convert_mat_to_pyarray_2(py: Python<'_>, frame: CvlMat) -> PyResult<Py<PyArray<u8, Ix2>>> {
     let rows = frame.rows() as usize;
@@ -30,21 +30,11 @@ pub fn convert_mat_to_pyarray_3(py: Python<'_>, frame: CvlMat) -> PyResult<Py<Py
 pub fn convert_array_2_to_mat(frame: PyReadonlyArray2<u8>) -> CvlMat {
     let shape_slice = frame.shape();
     let array_data = frame.as_slice().unwrap();
-    CvlMat::new_with_data(
-        shape_slice[0] as i32,
-        shape_slice[1] as i32,
-        0,
-        array_data
-    )
+    CvlMat::new_with_data(shape_slice[0] as i32, shape_slice[1] as i32, 0, array_data)
 }
 
 pub fn convert_array_3_to_mat(frame: PyReadonlyArray3<u8>) -> CvlMat {
     let shape_slice = frame.shape();
     let array_data = frame.as_slice().unwrap();
-    CvlMat::new_with_data(
-        shape_slice[0] as i32,
-        shape_slice[1] as i32,
-        16,
-        array_data
-    )
+    CvlMat::new_with_data(shape_slice[0] as i32, shape_slice[1] as i32, 16, array_data)
 }
