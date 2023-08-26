@@ -16,7 +16,7 @@ def test_grayscale():
     loaded_images = load_resource_frames()
     first_frame = loaded_images[0]
     gray_image = pycvl.grayscale(first_frame)
-    assert gray_image.shape == (720, 1280)
+    assert gray_image.shape == (360, 640)
 
 
 def test_threshold():
@@ -24,7 +24,7 @@ def test_threshold():
     first_frame = loaded_images[0]
     gray_image = pycvl.grayscale(first_frame)
     threshold_image = pycvl.threshold(gray_image, 100, 200)
-    assert threshold_image.shape == (720, 1280)
+    assert threshold_image.shape == (360, 640)
 
 
 def test_threshold_throw():
@@ -39,7 +39,7 @@ def test_canny():
     first_frame = loaded_images[0]
     gray_image = pycvl.grayscale(first_frame)
     canny_image = pycvl.canny(gray_image, 100, 200, 3, True)
-    assert canny_image.shape == (720, 1280)
+    assert canny_image.shape == (360, 640)
 
 
 def test_canny_sigma():
@@ -47,7 +47,7 @@ def test_canny_sigma():
     first_frame = loaded_images[0]
     gray_image = pycvl.grayscale(first_frame)
     canny_image = pycvl.canny_sigma(gray_image, 3, 0.05, True)
-    assert canny_image.shape == (720, 1280)
+    assert canny_image.shape == (360, 640)
 
 
 def test_canny_throw():
@@ -66,7 +66,7 @@ def test_compute_median():
     first_frame = loaded_images[0]
     gray_image = pycvl.grayscale(first_frame)
     result = pycvl.median(gray_image)
-    assert result == 45.84036024305556
+    assert result == 194.86283854166666
 
 
 def test_difference():
@@ -74,8 +74,8 @@ def test_difference():
     gray_images = map(lambda x: pycvl.grayscale(x), loaded_images)
     canny_images = map(lambda x: pycvl.canny_sigma(x, 3, 0.5, True), gray_images)
     difference_image = pycvl.difference(list(canny_images))
-    assert difference_image.shape == (720, 1280)
-    assert pycvl.median(difference_image) == 4.315022786458333
+    assert difference_image.shape == (360, 640)
+    assert pycvl.median(difference_image) == 10.491080729166667
 
 
 def test_difference_reduce():
@@ -83,8 +83,8 @@ def test_difference_reduce():
     gray_images = map(lambda x: pycvl.grayscale(x), loaded_images)
     canny_images = map(lambda x: pycvl.canny_sigma(x, 3, 0.5, True), gray_images)
     difference_image = pycvl.difference_reduce(list(canny_images))
-    assert difference_image.shape == (720, 1280)
-    assert pycvl.median(difference_image) == 7.003922526041666
+    assert difference_image.shape == (360, 640)
+    assert pycvl.median(difference_image) == 17.324283854166666
 
 
 def test_vibration():
@@ -95,7 +95,7 @@ def test_vibration():
 
     color_bounds = pycvl.PyColorBounds(8, 9, 10, 11)
     vibration_image = pycvl.vibration(difference_image, color_bounds, 8, 2)
-    assert vibration_image.shape == (720, 1280, 4)
+    assert vibration_image.shape == (360, 640, 4)
 
 
 def load_resource_frames() -> List[ndarray]:
