@@ -21,6 +21,7 @@ Cargo.lock
 **/*.rs.bk
 .DS_Store
 *.iml
+*.log
 
 # There are cache of python project
 .pytest_cache/
