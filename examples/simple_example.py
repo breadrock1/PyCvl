@@ -5,13 +5,7 @@ from cv2 import VideoCapture
 from cv2 import error, imshow, waitKey
 from numpy import ndarray
 
-from pycvl import PyColorBounds
-from pycvl import (
-    canny_sigma,
-    difference_reduce,
-    grayscale,
-    vibration
-)
+from pycvl import PyColorBounds, PyCvlHelper
 from queue_list import QueueList
 
 
@@ -34,6 +28,7 @@ class VibrationFrameExample:
         """
         self.video_file_path = str(video_file)
 
+        self.pycvl_helper = PyCvlHelper()
         self.color_bounds = PyColorBounds(ch1=8, ch2=9, ch3=10, ch4=11)
         self.collected_frames = QueueList(max_size=MAX_QUEUE_SIZE)
 
@@ -78,17 +73,21 @@ class VibrationFrameExample:
         :param frame: (FrameType) video stream frame.
         """
         try:
-            grayscale_image = grayscale(frame=frame)
-            canny_image = canny_sigma(frame=grayscale_image, size=3, sigma=0.05, is_l2=True)
+            grayscale_image = self.pycvl_helper.grayscale(frame=frame)
+            canny_image = self.pycvl_helper.canny_sigma(
+                frame=grayscale_image, size=3, sigma=0.05, is_l2=True)
+
             self.collected_frames.append(canny_image)
             if len(self.collected_frames) < MAX_QUEUE_SIZE:
                 return
 
-            difference_image = difference_reduce(self.collected_frames.to_list)
-            vibration_image = vibration(frame=difference_image,
-                                        color_bounds=self.color_bounds,
-                                        neighbours=8,
-                                        window_size=2)
+            difference_image = self.pycvl_helper.difference_reduce(self.collected_frames.to_list)
+            vibration_image = self.pycvl_helper.vibration(
+                frame=difference_image,
+                color_bounds=self.color_bounds,
+                neighbours=8,
+                window_size=2
+            )
 
             imshow("Vibration Example", vibration_image)
         except Exception as err:
