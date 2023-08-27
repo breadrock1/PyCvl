@@ -1,13 +1,14 @@
+use crate::helper::{PyMatrix2, PyMatrix3F};
+
 use cvlcore::core::mat::*;
 
-use numpy::ndarray::{Array2, Array3};
-use numpy::{Ix2, Ix3, ToPyArray};
-use numpy::{PyArray, PyReadonlyArray2, PyReadonlyArray3};
+use numpy::ndarray::{Array2, Array3, Dimension};
+use numpy::{PyArray, ToPyArray};
 
 use pyo3::exceptions::PyException;
 use pyo3::prelude::{Py, PyResult, Python};
 
-pub fn convert_mat_to_pyarray_2(py: Python<'_>, frame: CvlMat) -> PyResult<Py<PyArray<u8, Ix2>>> {
+pub fn convert_mat_to_pyarray_2(py: Python<'_>, frame: CvlMat) -> PyResult<Py<PyMatrix2>> {
     let rows = frame.rows() as usize;
     let cols = frame.columns() as usize;
     let vec_data = frame.to_slice().unwrap().to_vec();
@@ -17,7 +18,7 @@ pub fn convert_mat_to_pyarray_2(py: Python<'_>, frame: CvlMat) -> PyResult<Py<Py
     }
 }
 
-pub fn convert_mat_to_pyarray_3(py: Python<'_>, frame: CvlMat) -> PyResult<Py<PyArray<f64, Ix3>>> {
+pub fn convert_mat_to_pyarray_3(py: Python<'_>, frame: CvlMat) -> PyResult<Py<PyMatrix3F>> {
     let rows = frame.rows() as usize;
     let cols = frame.columns() as usize;
     let chls = frame.channels() as usize;
@@ -27,14 +28,13 @@ pub fn convert_mat_to_pyarray_3(py: Python<'_>, frame: CvlMat) -> PyResult<Py<Py
     }
 }
 
-pub fn convert_array_2_to_mat(frame: PyReadonlyArray2<u8>) -> CvlMat {
+pub fn convert_array_to_mat<T: Dimension>(frame: &PyArray<u8, T>, cv_type: i32) -> CvlMat {
     let shape_slice = frame.shape();
-    let array_data = frame.as_slice().unwrap();
-    CvlMat::new_with_data(shape_slice[0] as i32, shape_slice[1] as i32, 0, array_data)
-}
-
-pub fn convert_array_3_to_mat(frame: PyReadonlyArray3<u8>) -> CvlMat {
-    let shape_slice = frame.shape();
-    let array_data = frame.as_slice().unwrap();
-    CvlMat::new_with_data(shape_slice[0] as i32, shape_slice[1] as i32, 16, array_data)
+    let array_data = unsafe { frame.as_slice().unwrap() };
+    CvlMat::new_with_data(
+        shape_slice[0] as i32,
+        shape_slice[1] as i32,
+        cv_type,
+        array_data,
+    )
 }
