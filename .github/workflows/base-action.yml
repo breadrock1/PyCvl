@@ -64,4 +64,4 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          pylint --rcfile=.pylintrc --output=pylint.log --jobs 10 $(find ./ -name "*.py" -not -path "./venv/*" -not -path "./target/*" | xargs)
+          pylint --rcfile=.pylintrc --output=pylint.log --jobs 10 $(git ls-files '*.py*')
