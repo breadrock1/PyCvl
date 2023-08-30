@@ -4,11 +4,6 @@ run-name: ${{ github.actor }} is building action
 on:
   pull_request_target:
     types: [ assigned, opened, synchronize, reopened ]
-  push:
-    branches:
-      - 'master'
-      - 'actions/**'
-      - 'release/**'
 
 jobs:
 
