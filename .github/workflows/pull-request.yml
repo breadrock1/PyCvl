@@ -7,31 +7,6 @@ on:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
-    permissions:
-      contents: write
-
-    steps:
-      - name: Install prerequisites
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential curl \
-            cmake clang libclang-dev llvm llvm-dev \
-            qt5-default libopencv-dev \
-            python3-dev python3-numpy python3-opencv
-      
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Build project
-        run: cargo build --verbose --jobs $(nproc)
-
   flake8:
     name: Code style
     runs-on: ubuntu-20.04
@@ -86,3 +61,32 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           pylint --rcfile=.pylintrc --output=pylint.log --jobs 10 ./python/pycvl 
+
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    needs: [ pylint ]
+    permissions:
+      contents: write
+
+    steps:
+      - name: Install prerequisites
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential curl \
+            cmake clang libclang-dev llvm llvm-dev \
+            qt5-default libopencv-dev \
+            python3-dev python3-numpy python3-opencv
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: build
+          args: --release
+          rust-toolchain: nightly
