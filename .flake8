@@ -33,6 +33,9 @@ statistics = True
 
 # Provide a comma-separated list of glob patterns to exclude from checks.
 exclude =
+    # init package files
+    __init__.py,
+
     # .* files
     .flake8
 
