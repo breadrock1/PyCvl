@@ -35,6 +35,7 @@ jobs:
   flake8:
     name: Code style
     runs-on: ubuntu-latest
+    needs: [ build ]
     permissions:
       contents: write
     strategy:
