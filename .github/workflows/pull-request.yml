@@ -7,6 +7,31 @@ on:
 
 jobs:
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install prerequisites
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential curl \
+          cmake clang libclang-dev llvm llvm-dev \
+          qt5-default libopencv-dev \
+          python3-dev python3-numpy python3-opencv
+
+      - name: Build project
+        run: cargo build --verbose --jobs $(nproc)
+
   flake8:
     name: Code style
     runs-on: ubuntu-latest
