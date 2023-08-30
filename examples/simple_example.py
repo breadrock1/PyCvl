@@ -5,8 +5,7 @@ from cv2 import VideoCapture
 from cv2 import error, imshow, waitKey
 from numpy import ndarray
 
-from pycvl import PyColorBounds, PyCvlHelper
-from queue_list import QueueList
+from pycvl import PyColorBounds, PyCvlHelper, QueueList
 
 
 MAX_QUEUE_SIZE = 10
