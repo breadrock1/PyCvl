@@ -22,6 +22,7 @@ class PyCvlHelper:
         """
         There is main constructor for current class which provides ability to use CvlCore APIs.
         """
+        self.a = 0
 
     def median(self, frame: ndarray) -> float:
         """

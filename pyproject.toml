@@ -1,9 +1,11 @@
 [project]
 name = "pycvl"
 version = "0.0.1"
-license = "LICENSE"
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.7"
+keywords = [ "pycvl", "cvlcore", "rust", "opencv" ]
+dependencies = [ "numpy>=1.25" ]
 authors = [
     { name = "Bread White", email = "breadrock1@gmail.com" },
     { name = "Artem Amentes" , email = "artem@socialcode.ru"},
@@ -13,5 +15,10 @@ authors = [
 homepage = "https://github.com/breadrock1/pycvl"
 
 [build-system]
-requires = ["maturin>=0.13,<0.14", "numpy>=1.25"]
+requires = ["maturin>=0.13,<0.14"]
 build-backend = "maturin"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+python-source = "python"
+module-name = "pycvl.pycvl"
