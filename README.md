@@ -2,6 +2,8 @@
 
 ![GitHub version](https://img.shields.io/badge/version-v0.0.1-green?style=plastic&labelColor=dark)
 
+[![Pull Request Checking](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml/badge.svg)](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml)
+
 ### Program Description
 
 The `PyCvl` project is a `Python` bindings based on `CVLCore` private repository which provides ability to use core `APIs` for continuous analysis of a video stream including generating `vibro-image`.
