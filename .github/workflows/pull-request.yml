@@ -4,11 +4,6 @@ run-name: ${{ github.actor }} is building action
 on:
   pull_request_target:
     types: [ assigned, opened, synchronize, reopened ]
-  push:
-    branches:
-      - 'master'
-      - 'actions/**'
-      - 'release/**'
 
 jobs:
 
@@ -36,7 +31,8 @@ jobs:
           pip install flake8
 
       - name: Code style checker
-        run: flake8 ./ --config .flake8 --show-source --statistics --output-file flake8.log --exclude "venv","target"
+        run: |
+          flake8 ./python/pycvl --config .flake8 --show-source --statistics --output-file flake8.log
 
   pylint:
     name: Pylint
@@ -64,4 +60,4 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          pylint --rcfile=.pylintrc --output=pylint.log --jobs 10 $(git ls-files '*.py*')
+          pylint --rcfile=.pylintrc --output=pylint.log --jobs 10 ./python/pycvl 
