@@ -2,7 +2,7 @@
 
 ![GitHub version](https://img.shields.io/badge/version-v0.0.1-green?style=plastic&labelColor=dark)
 
-[![Pull Request Checking](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml/badge.svg)](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml)
+[![Build master](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml/badge.svg)](https://github.com/breadrock1/PyCvl/actions/workflows/pull-request.yml)
 
 ### Program Description
 
