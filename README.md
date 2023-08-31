@@ -28,7 +28,8 @@ To get main library access please visit site: https://clvdetector.socialcodesoft
     year = {2023},
     publisher = {GitHub},
     journal = {GitHub repository},
-    email = {artem@socialcodesoftware.co.uk}
+    email = {artem@socialcodesoftware.co.uk,
+             breadrock1@gmail.com}
 }
 ```
 
