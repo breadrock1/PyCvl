@@ -21,13 +21,14 @@ To get main library access please visit site: https://clvdetector.socialcodesoft
 
 ### Cite
 ```
-@misc{PyCvl,\
-author = {Artem Amentes, Gleb Akimov},\
-title = {Contactless Video Lie Detector},\
-year = {2023},\
-publisher = {GitHub},\
-journal = {GitHub repository},\
-email = {artem@socialcodesoftware.co.uk}
+@misc{
+    PyCvl,
+    authors = {Artem Amentes, Gleb Akimov},
+    title = {Contactless Video Lie Detector},
+    year = {2023},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    email = {artem@socialcodesoftware.co.uk}
 }
 ```
 
