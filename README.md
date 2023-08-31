@@ -20,7 +20,8 @@ The more information you can find here [CvlDesktop](https://github.com/breadrock
 To get main library access please visit site: https://clvdetector.socialcodesoftware.co.uk/
 
 ### Cite
-@misc{CLVDetector,\
+```
+@misc{PyCvl,\
 author = {Artem Amentes, Gleb Akimov},\
 title = {Contactless Video Lie Detector},\
 year = {2023},\
@@ -28,6 +29,7 @@ publisher = {GitHub},\
 journal = {GitHub repository},\
 email = {artem@socialcodesoftware.co.uk}
 }
+```
 
 ### License
 GNU AFFERO GENERAL PUBLIC LICENSE
